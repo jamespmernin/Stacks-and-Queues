@@ -1,56 +1,86 @@
-# Data Structures
-Data structures are collections of values, the relationship between them, and the functions or operations that can be applied to the data
+# Intro to Data Structures with Linked Lists
 
-#### What characteristics must a data structures have and what are things in common between data structures? 
+## Objectives
 
-- collection of values
-- contain a relationship between these values
-- functionality/operations that can be applied to the array.
+By the end of this lesson and exercise, you should be able to:
 
-Different data structure excel in different situation. They are very useful in special cases and you have to know about them in order to decide when to implement one. 
+1. Define data structures and give examples.
+2. Define what a singly linked list is.
+3. Compare and contrast linked lists with arrays.
+4. Implement insertion, removal and traversal methods on singly linked lists.
 
-You've already worked with many data structure unknowingly. DOM - tree. They are often an interview questions.
+<br>
 
-## These are some we'll be focussing on...
-- Binary Search Trees
-- Queues 
-- Single Linked Lists 
-- Undirected Unweighted Graphs 
-- Binary Heaps 
-- Directed Graphs
+## Data Structures
+
+A data structure is a _**particular way of containerizing and organizing data** so that a program can **access, analyze, and utilize the data effectively**_.
+
+What are 3 common characteristics of data structures?
+
+<details><summary>Reveal Answer</summary>
+
+- A collection of values.
+- A relationship between these values.
+- Operations that can manipulate the structure.
+
+</details>
+
+### The Importance of Data Structures
+
+Different data structures excel in different situations. Depending on your dilemma, understanding data structures and their specific use cases can drastically increase your abilit to manipulate and analyze data– plus, they're a big topic in technical interviews!
+
+You've already worked with many data structures– namely two– can you name them?
+
+<details><summary>Reveal Answer</summary>
+
+- Arrays
+- Hashes
+- (The DOM is technically not a data structure, but )
+
+</details>
+
+In our CS lessons, the data structures we'll be looking into include:
+
+- Singly Linked Lists
+- Stacks & Queues
 - Hash Tables
-- Stacks
+- Sets
+- Binary Search Trees & Tries
+- Binary Heaps
+- Graphs
 
-###  Classes
+### Classes
 
+Do you remember the characteristics of classes from Object Oriented Programming?
 
-* Classes are templates for objects.
-* Javascript calls a `constructor` method when we create a new instance of a class.
-* Inheritance is when we create a parent class with properties and methods that we can extend to child classes.
-* We use the extends keyword to create a subclass.
-* The `super` keyword calls the `constructor()` of a parent class.
-* Static methods are called on the class, but not on instances of the class.
-## Linked lists 
+<details><summary>Reveal Answer</summary>
 
-### Objectives: 
+- Classes are templates for objects.
+- Javascript calls a `constructor` method when we create a new instance of a class.
+- Inheritance is when we create a parent class with properties and methods that we can extend to child classes.
+- We use the `extends` keyword to create a subclass.
+- The `super` keyword calls the `constructor()` of a parent class.
+- Static methods are called on the class, but not on instances of the class.
 
-1. Define what a singly linked list is 
-2. Compare and contrast Linked Lists with Arrays 
-3. Implement insertion, removal and traversal methods on Singly Linked List
+</details>
 
-### Definition: 
+<br>
 
-A **linked list** is a data structure, in which the elements are **not** stored at contiguous(right next to each other) memory locations. The elements in a linked list are linked using **pointers** as shown in the image below:
+## Introducing (Singly) Linked Lists
 
-![](https://media.geeksforgeeks.org/wp-content/cdn-uploads/gq/2013/03/Linkedlist.png)
+A **linked list** is **an ordered, linear data structure**, similar to an array, in which the elements are linked **using chained references** as opposed to an arrays' indices. 
 
-Source: [Geeks for Geeks](https://www.geeksforgeeks.org/data-structures/linked-list/)
+A linked list consists of **nodes**, the first of which is called the **head**, the last of which is called the **tail**. Each node has a **value** and a **pointer** to the next node, or to `null` if it's the tail node.
 
+![singly-linked-list](singly-linked-list.jpg)
 
-We could also say that linked list consists of **nodes**, and each **node** has a **value** and a **pointer** to another node or null.
-Each item stores the address of the next item in the list. A bunch of random memory addresses are linked together. 
+Note that the nodes are not stored at contiguous memory locations, but are linked to random memory locations and are linked using pointers. 
 
-```
+This means that **accessing elements in the linked list requires that you start at the `head`, and move subsequently through the list, towards the `tail`**.
+
+In practice, a linked list looks like this:
+
+``` js
 const list = {
     head: {
         value: 12
@@ -65,26 +95,42 @@ const list = {
 };
 ```
 
-* The first and last node of a linked list usually are called the **head** and **tail** of the list, respectively. Thus, we can traverse the list starting at the head and ending at the tail. 
-* The tail node is a special node, where the next pointer is always pointing or linking to a **null** reference, indicating the end of the list.
+The `next` property of each node in the linked list is a reference to the next node.
 
-Arrays are great if you want to read random elements instantly, because you can look up any element of your array instantly.Arrays allow **random** access. With a linked list, the elements aren't next to each other, so you can't calculate the position of the fifth element. You have to go to the first element, to get the address to the second and so forth. This is so-called **sequential access** which means we could only read the elements one by one, starting at the first item.
+### Linked Lists Versus Arrays
+
+What are some key differences between a linked list and an array?
+
+<details><summary>Reveal Answer</summary>
+
+- Arrays are stored in memory at a single contiguous location– and thus, arrays are 1) restricted to a declared number of elements, and 2) can be randomly accessed.
+
+- Linked Lists are stored at non-contiguous locations– and thus, linked lists make 1) adding and removing elements is much easier, and 2) cannot be randomly accessed, but must be sequentially accessed.
+
+- Arrays are accessible using bracket notation– finding the third element in an array would be found at `arr[2]`.
+
+- Linked lists would require dot notation starting at the head– finding the third element in an array would be found at `list.head.next.next.value`.
+
+</details>
 
 ![](comparison.png)
 
+#### Complexity
 
-|               | Array          | Linked list  |
-| ------------- |:-------------:| ---------:|
-| Reading(access)       | O(1)          |   O(N)    |
-| Insertion     | O(N)          |   O(1)    |
-| Removal     | O(N)          |   O(1) or O(N)   |              
-| Search     | O(1)          |   O(N)   |     
+When considering how you might manipulate the data structure, the time and space complexity for arrays and linked lists have certain advantages over each other:
 
+| Method           | Array |  Linked list |
+| ---------------- | :---: | -----------: |
+| Reading (Access) | O(1)  |         O(N) |
+| Insertion        | O(N)  |         O(1) |
+| Removal          | O(N)  | O(1) or O(N) |
+| Search           | O(1)  |         O(N) |
 
+With some exceptions:
 
-Exceptions: 
-
-1. Insertion at the end of the array takes O(N). 
+1. Insertion at the end of the array takes O(N).
 2. Removing from end of a linked list takes O(N), because we need to find the item right before the tail and that inlolves going through the whole list.
 
+## Time for an exercise!
 
+In breakout rooms, fork and clone this repo and follow the instructions in `LinkedList.js`.
