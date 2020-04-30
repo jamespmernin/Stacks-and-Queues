@@ -1,8 +1,10 @@
-# Data Structures Cont'd: Stacks & Queues
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) SOFTWARE ENGINEERING IMMERSIVE
+
+## Data Structures Cont'd: Stacks & Queues
 
 Peanut butter and jelly, Batman and Robin, Rick and Morty... Stacks and Queues are another iconic duo.
 
-## Objectives
+### Objectives
 
 By the end of this lesson and exercise, you should be able to:
 
@@ -12,7 +14,7 @@ By the end of this lesson and exercise, you should be able to:
 
 <br>
 
-## Introducing Stacks & Queues
+### Introducing Stacks & Queues
 
 What _are_ stacks and queues?
 
@@ -22,7 +24,7 @@ What _are_ stacks and queues?
 
 </details>
 
-### Stacks
+#### Stacks
 
 
 ![](https://media.giphy.com/media/hRsayJrDAx8WY/giphy.gif)
@@ -41,7 +43,7 @@ Of course, you've worked with and observed stacks already. Can you name some exa
 
 </details>
 
-## Queues
+### Queues
 
 ![](https://i.imgur.com/3fn1PER.gif)
 
@@ -60,7 +62,7 @@ You also have worked with Queues– can you name some?
 
 <br>
 
-## Efficiency
+### Efficiency
 
 Of course, with an incredibly limited set of operations, you can get impressive efficiency with stacks and queues:
 
@@ -68,6 +70,6 @@ Of course, with an incredibly limited set of operations, you can get impressive 
 
 <br>
 
-## Time for an exercise!
+### Time for an exercise!
 
 In breakout rooms, fork and clone this repo and follow the instructions in `bracketMatcher.md`.
