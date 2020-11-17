@@ -1,4 +1,8 @@
-// STACK IMPLEMENTATION
+/* 
+ * STACK IMPLEMENTATION
+ * The idea for this function came from here: https://www.geeksforgeeks.org/check-for-balanced-parentheses-in-an-expression/
+ * I was able to implement this in JavaScript but that was my only contribution
+ */
 class Stack {
   constructor() {
     this.items = []
@@ -24,9 +28,46 @@ class Stack {
 // refer to the bracket matching readMe.md for more details
 
 function bracketMatching(input) {
+  let s = new Stack;
+  let x;
 
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] === '(' || input[i] === '{' || input[i] === '[') {
+      s.push(input[i]);
+    }
+    if (s.isEmpty()) {
+      return false;
+    }
+    switch (input[i]) {
+      case ')':
+        x = s.peek();
+        s.pop();
+        if (x === '{' || x === '[') {
+          return false;
+        }
+        break;
+      case '}':
+        x = s.peek();
+        s.pop();
+        if (x === '(' || x === '[') {
+          return false;
+        }
+        break;
+      case ']':
+        x = s.peek();
+        s.pop();
+        if (x === '(' || x === '{') {
+          return false;
+        }
+        break;
+    }
+  }
+  return s.isEmpty();
 }
 
+console.log(`Empty result is: ${bracketMatching('')}`);
+console.log(`Mismatched result is: ${bracketMatching('{([]))})')}`);
+console.log(`Matched result is: ${bracketMatching('{([])}')}`);
 
 class Node {
   constructor(data, priority) {
